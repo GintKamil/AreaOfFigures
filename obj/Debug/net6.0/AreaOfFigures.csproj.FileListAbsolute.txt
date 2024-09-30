@@ -1,0 +1,12 @@
+C:\проект c#\AreaOfFigures\bin\Debug\net6.0\AreaOfFigures.deps.json
+C:\проект c#\AreaOfFigures\bin\Debug\net6.0\AreaOfFigures.dll
+C:\проект c#\AreaOfFigures\bin\Debug\net6.0\AreaOfFigures.pdb
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.csproj.AssemblyReference.cache
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.GeneratedMSBuildEditorConfig.editorconfig
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.AssemblyInfoInputs.cache
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.AssemblyInfo.cs
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.csproj.CoreCompileInputs.cache
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.dll
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\refint\AreaOfFigures.dll
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\AreaOfFigures.pdb
+C:\проект c#\AreaOfFigures\obj\Debug\net6.0\ref\AreaOfFigures.dll
