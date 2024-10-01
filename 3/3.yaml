@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-app
+spec:
+  replicas: 3  # Запускаем 3 реплики для обеспечения стабильной нагрузки
+  selector:
+    matchLabels:
+      app: my-web-app
+  template:
+    metadata:
+      labels:
+        app: my-web-app
+    spec:
+      containers:
+      - name: web-app
+        image: my-web-app-image:latest  # Jбраз приложения
+        resources:
+          requests:
+            cpu: "100m"  # Запрашиваем 100m CPU (0.1 CPU) для стабильной работы
+            memory: "128Mi"  # Запрашиваем 128Mi памяти
+          limits:
+            cpu: "1"  # Ограничиваем использование CPU до 1 CPU
+            memory: "256Mi"  # Ограничиваем использование памяти до 256Mi
+        # Настаем readiness probe, чтобы под был готов после завершения инициализации
+        readinessProbe:
+          httpGet:
+            path: /health  # Путь для проверки состояния (должен возвращать 200 OK, когда приложение готово)
+            port: 8080  # Порт, на котором работает приложение
+          initialDelaySeconds: 10  # Подводим к первому запросу с задержкой 10 секунд для инициализации
+          periodSeconds: 5  # Проверяем состояние каждые 5 секунд
+          failureThreshold: 3  # Устанавливаем, что после 3 неудачных проверок, под будет считаться неготовым
+      affinity:  # Задаем правила для распределения подов по нодам
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - my-web-app
+            topologyKey: "kubernetes.io/hostname"  # Нода, на которой выполняется под
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-web-app-service
+spec:
+  type: ClusterIP  # Тип сервиса для доступа внутри кластера
+  ports:
+  - port: 8080  # Порт, на котором сервис будет доступен
+    targetPort: 8080  # Порт пода, на который сервис будет перенаправлять трафик
+  selector:
+    app: my-web-app  # Селектор, который определяет, какие поды обрабатывать запросы
